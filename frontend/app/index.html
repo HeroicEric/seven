@@ -16,6 +16,9 @@
     <script>
       window.SevenENV = {{ENV}};
       window.EmberENV = window.SevenENV.EmberENV;
+
+      window.ENV = window.ENV || {};
+      window.ENV.torii = window.SevenENV.torii;
     </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/seven.js"></script>
