@@ -20,7 +20,8 @@ module.exports = function(environment) {
     torii: {
       providers: {
         'github-oauth2': {
-          apiKey: '8c68de8c035bd2feae45'
+          apiKey: '00dd1790dd97b261de98',
+          redirectUri: 'http://localhost:4200/auth/callback'
         }
       }
     }

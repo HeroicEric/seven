@@ -1,4 +1,5 @@
 {{#if session.isAuthenticated}}
+  <h1>YOU'RE ALREADY SIGNED IN!</h1>
   <button {{ action 'invalidateSession' }}>Sign out</button>
 {{else}}
   <button {{action "authenticate" "github-oauth2"}}>Sign in with Github</button>

@@ -7,15 +7,20 @@ export default OAuth2.extend({
   authenticate: function(options) {
     var _this = this;
 
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    var promise = new Ember.RSVP.Promise(function(resolve, reject) {
       options.torii.open(options.provider).then(function(authData) {
-        console.log(options.torii.toString());
-        var data = {
+        resolve({
           grant_type: 'authorization_code',
           code: authData.authorizationCode,
           client_id: ''
-        };
+        });
+      }, function(error) {
+        reject(error);
+      });
+    });
 
+    return promise.then(function(data) {
+      return new Ember.RSVP.Promise(function(resolve, reject) {
         _this.makeRequest(data).then(function(response) {
           Ember.run(function() {
             resolve({ access_token: response.access_token });
@@ -25,8 +30,6 @@ export default OAuth2.extend({
             reject(xhr.responseJSON || xhr.responseText);
           });
         });
-      }, function(error) {
-        reject(error);
       });
     });
   }
